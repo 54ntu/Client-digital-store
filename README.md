@@ -46,4 +46,4 @@ We create one global state from there we can accesss the required data in multip
 
 # comparison between the use of useState and redux-toolkit slices
 
-<img src="./src//assets/reducer-useState-use-difference.png>
+<img src="./src//assets/reducer-useState-use-difference.png">
