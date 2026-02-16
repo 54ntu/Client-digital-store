@@ -43,3 +43,7 @@ We create one global state from there we can accesss the required data in multip
 # How do we use redux-toolkit in the fronted????
 
 <img src="./src/assets/redux-toolkit.png">
+
+# comparison between the use of useState and redux-toolkit slices
+
+<img src="./src//assets/reducer-useState-use-difference.png>
