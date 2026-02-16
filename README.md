@@ -1,73 +1,42 @@
-# React + TypeScript + Vite
+# Digital Dokan
+<h2>Brief description about this project 🚀</h2>
+<hr>
+<p>This project is dynamic full stack project where admin can perform all the operations whereas other users like customers they can visit the sites and add the items into their cart and they have to login and register before they placed an order.
+They will be provided with the different payment options. When the order is placed admin can check the order status and he/she can update the status of the order.
+</p>
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Getting started 🎉
+<p>This instructions will help you to set up and run the project in your local machine. 💻</p>
 
-Currently, two official plugins are available:
+# Prerequisities 📝
+<p>You need to have the following software installed:</p>
+<ul>
+  <li>Node JS 📦</li>  
+</ul>
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## React Compiler
+# Installation 🛠️
+<p>Clone the repository and installed the dependencies: </p>
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+```javascript
 
-## Expanding the ESLint configuration
+git remote add origin git@github.com:54ntu/Client-digital-store.git
+cd Client-digital-store
+npm install //to install all the node_modules
+npm run dev for frontend
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+
+
+# Redux-toolkit
+
+<h3> Why to use Redux-toolkit???🤔🤔🤔🤔🤔</h3>
+<p>While we want to pass data from one page to another page using prop-drilling concept, it will be difficult to pass the data from one page to another page if the number of the pages increased. We can also use session or cookies to store and pass the data from one page to another, but the problem is limited storage.
+<h3>Redux-toolkit works solves this problem  but how??</h3>
+
+We create one global state from there we can accesss the required data in multiple pages easily.
+
+</p>
