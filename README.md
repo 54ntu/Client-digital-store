@@ -47,3 +47,9 @@ We create one global state from there we can accesss the required data in multip
 # comparison between the use of useState and redux-toolkit slices
 
 <img src="./src//assets/reducer-useState-use-difference.png">
+
+# Once the reducer is created we redux-toolkit handles the creations of actions, we do not need to write code for actions
+
+# and we also need to export reducer
+
+<img src="./src/assets/reducer-slice.png">
