@@ -1,11 +1,19 @@
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
+import Register from "./pages/Register";
+import { Provider } from "react-redux";
+import store from "./store/store";
 
 function App() {
   return (
     <>
-      <h1 className="text-5xl font-bold text-blue-950">
-        hello from react vite application
-      </h1>
+      <Provider store={store}>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/register" element={<Register />} />
+          </Routes>
+        </BrowserRouter>
+      </Provider>
     </>
   );
 }
