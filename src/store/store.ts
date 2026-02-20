@@ -5,8 +5,8 @@ import userSlice from "./userSlice.ts"
 
 const store = configureStore({
     reducer: {
-        haha: productSlice,
-        hehe: userSlice
+        product: productSlice,
+        user: userSlice
     }
 })
 
