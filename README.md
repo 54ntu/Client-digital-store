@@ -53,3 +53,51 @@ We create one global state from there we can accesss the required data in multip
 # and we also need to export reducer
 
 <img src="./src/assets/reducer-slice.png">
+
+
+# Important !!!!
+To send the data or post, put functionality we need to use useDispatch hooks
+and to get the data or fetch the data we use useSelector hooks
+
+but the problem is they dont have types, so in typescript it is important to define the types for those hooks.
+
+
+```js
+
+import { configureStore } from "@reduxjs/toolkit";
+import productSlice from "./productSlice.ts"
+import userSlice from "./userSlice.ts"
+
+
+const store = configureStore({
+    reducer: {
+        haha: productSlice,
+        hehe: userSlice
+    }
+})
+
+export default store
+
+export type AppDispatch = typeof store.dispatch  //this one is for useDispatch
+export type RootState = ReturnType<typeof store.getState>  //this one is for useSelector
+
+// AppDispatch and RootState are used to create types for those hooks.
+```
+
+# Now we have assigned the above types to the hooks
+
+```js
+import { useDispatch, useSelector, type TypedUseSelectorHook } from "react-redux";
+import type { AppDispatch, RootState } from "./store";
+
+
+export const useAppDispatch = useDispatch.withTypes<AppDispatch>();
+//useAppdispatch = useDispatch+types
+
+export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
+//useAppselector = useSelector +types
+
+
+//we need to do all these type casting in javascript
+//we can directly use useDispatch and useSelector hooks
+```
