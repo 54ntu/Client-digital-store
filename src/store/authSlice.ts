@@ -8,12 +8,19 @@ interface IUser {
     username: string,
     email: string,
     password: string,
+    token: string
 
+}
+
+interface ILoginUser {
+    email: string,
+    password: string
 }
 
 interface IAuthInitial {
     user: IUser,
-    status: Status
+    status: Status,
+
 
 }
 
@@ -22,7 +29,8 @@ const authInitial: IAuthInitial = {
     user: {
         username: "",
         email: "",
-        password: ""
+        password: "",
+        token: ""
     },
     status: Status.LOADING
 
@@ -37,13 +45,17 @@ const authSlice = createSlice({
         },
         setStatus(state: IAuthInitial, action: PayloadAction<Status>) {
             state.status = action.payload
+        },
+
+        setToken(state: IAuthInitial, action: PayloadAction<string>) {
+            state.user.token = action.payload
         }
 
     }
 })
 
 
-export const { setStatus, setUser } = authSlice.actions
+export const { setStatus, setUser, setToken } = authSlice.actions
 export default authSlice.reducer
 
 
@@ -67,4 +79,31 @@ export function registerUer(data: IUser) {
         }
 
     }
+}
+
+
+export function loginUser(data: ILoginUser) {
+    return async function loginUserThunk(dispatch: AppDispatch) {
+        try {
+            const response = await axios.post("http://localhost:4000/api/v1/users/login", data)
+            if (response.status === 200) {
+                dispatch(setStatus(Status.SUCCESS))
+                if (response.data.token) {
+                    localStorage.setItem("token", response.data.token)
+                    dispatch(setToken(response.data.token))
+                } else {
+                    dispatch(setStatus(Status.ERROR))
+                }
+
+            } else {
+                dispatch(setStatus(Status.ERROR))
+            }
+        } catch (error) {
+            console.log(error)
+            dispatch(setStatus(Status.ERROR))
+
+
+        }
+    }
+
 }
