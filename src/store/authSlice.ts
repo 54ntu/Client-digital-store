@@ -51,8 +51,9 @@ export function registerUer(data: IUser) {
     return async function registerUserThunk(dispatch: AppDispatch) {
         try {
             const response = await axios.post("http://localhost:4000/api/v1/users/register", data)
-            if (response.status === 200) {
+            if (response.status === 201) {
                 dispatch(setStatus(Status.SUCCESS))
+                dispatch(setUser(data))
             } else {
                 dispatch(setStatus(Status.ERROR))
             }

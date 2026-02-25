@@ -3,6 +3,7 @@ import "./App.css";
 import Register from "./pages/Register";
 import { Provider } from "react-redux";
 import store from "./store/store";
+import Home from "./pages/home/Home";
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
       <Provider store={store}>
         <BrowserRouter>
           <Routes>
+            <Route path="/" element={<Home />} />
             <Route path="/register" element={<Register />} />
           </Routes>
         </BrowserRouter>
