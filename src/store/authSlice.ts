@@ -5,10 +5,10 @@ import type { AppDispatch } from "./store";
 
 
 interface IUser {
-    username: string,
-    email: string,
-    password: string,
-    token: string
+    username: string | null,
+    email: string | null,
+    password: string | null,
+    token: string | null
 
 }
 
@@ -27,10 +27,11 @@ interface IAuthInitial {
 
 const authInitial: IAuthInitial = {
     user: {
-        username: "",
-        email: "",
-        password: "",
-        token: ""
+        username: null,
+        email: null,
+        password: null,
+        token: null
+
     },
     status: Status.LOADING
 
@@ -51,6 +52,7 @@ const authSlice = createSlice({
             state.user.token = action.payload
         }
 
+
     }
 })
 
@@ -63,9 +65,12 @@ export function registerUer(data: IUser) {
     return async function registerUserThunk(dispatch: AppDispatch) {
         try {
             const response = await axios.post("http://localhost:4000/api/v1/users/register", data)
+            console.log(`response from the backend is : ${response.data}`)
             if (response.status === 201) {
                 dispatch(setStatus(Status.SUCCESS))
-                dispatch(setUser(data))
+                dispatch(setUser({
+                    ...response.data.user
+                }))
             } else {
                 dispatch(setStatus(Status.ERROR))
             }
@@ -86,11 +91,14 @@ export function loginUser(data: ILoginUser) {
     return async function loginUserThunk(dispatch: AppDispatch) {
         try {
             const response = await axios.post("http://localhost:4000/api/v1/users/login", data)
+
+            console.log(`token: ${response.data.accessToken}`)
+
             if (response.status === 200) {
                 dispatch(setStatus(Status.SUCCESS))
-                if (response.data.token) {
-                    localStorage.setItem("token", response.data.token)
-                    dispatch(setToken(response.data.token))
+                if (response.data.accessToken) {
+                    localStorage.setItem("tokenhoyo", response.data.accessToken)
+                    dispatch(setToken(response.data.accessToken))
                 } else {
                     dispatch(setStatus(Status.ERROR))
                 }

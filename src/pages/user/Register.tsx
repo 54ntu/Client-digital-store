@@ -2,6 +2,7 @@ import { useState, type ChangeEvent, type FormEvent } from "react";
 // import { registerUer } from "../store/authSlice";
 import { useAppDispatch } from "../../store/hooks";
 import { registerUer } from "../../store/authSlice";
+import { Link } from "react-router-dom";
 
 const Register = () => {
   const dispatch = useAppDispatch();
@@ -116,12 +117,12 @@ const Register = () => {
                 </button>
                 <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                   Already have an account?{" "}
-                  <a
-                    href="#"
+                  <Link
+                    to="/login"
                     className="font-medium text-primary-600 hover:underline dark:text-primary-500"
                   >
                     Login here
-                  </a>
+                  </Link>
                 </p>
               </form>
             </div>

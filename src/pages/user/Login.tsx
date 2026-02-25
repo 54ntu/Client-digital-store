@@ -1,6 +1,28 @@
 import { Link } from "react-router-dom";
+import { useAppDispatch } from "../../store/hooks";
+import { useState, type ChangeEvent, type FormEvent } from "react";
+import { loginUser } from "../../store/authSlice";
 
 function Login() {
+  const dispatch = useAppDispatch();
+  const [data, setData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setData({
+      ...data,
+      [name]: value,
+    });
+  };
+
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    dispatch(loginUser(data));
+  };
+
   return (
     <div className=" flex h-screen items-center justify-center px-4 sm:px-6 lg:px-8">
       <div className="w-full max-w-md space-y-8">
@@ -15,7 +37,7 @@ function Login() {
             Sign In
           </h2>
 
-          <form className="space-y-6">
+          <form className="space-y-6" onSubmit={handleSubmit}>
             <div>
               <label
                 htmlFor="password"
@@ -29,6 +51,7 @@ function Login() {
                   type="email-address"
                   autoComplete="email-address"
                   required
+                  onChange={handleChange}
                   className="px-2 py-3 mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-sky-500 sm:text-sm"
                 />
               </div>
@@ -47,6 +70,7 @@ function Login() {
                   type="password"
                   autoComplete="password"
                   required
+                  onChange={handleChange}
                   className="px-2 py-3 mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-sky-500 sm:text-sm"
                 />
               </div>
