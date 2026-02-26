@@ -1,10 +1,13 @@
-import { Link } from "react-router-dom";
-import { useAppDispatch } from "../../store/hooks";
-import { useState, type ChangeEvent, type FormEvent } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { useEffect, useState, type ChangeEvent, type FormEvent } from "react";
 import { loginUser } from "../../store/authSlice";
+import { Status } from "../../globals/types/type";
 
 function Login() {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const status = useAppSelector((store) => store.auth.status);
   const [data, setData] = useState({
     email: "",
     password: "",
@@ -22,6 +25,14 @@ function Login() {
     e.preventDefault();
     dispatch(loginUser(data));
   };
+
+  useEffect(() => {
+    if (status === Status.SUCCESS) {
+      navigate("/");
+    } else if (status === Status.ERROR) {
+      alert("please try again!!!!!!!!");
+    }
+  }, [status]);
 
   return (
     <div className=" flex h-screen items-center justify-center px-4 sm:px-6 lg:px-8">

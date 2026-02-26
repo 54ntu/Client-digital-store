@@ -92,7 +92,7 @@ export function loginUser(data: ILoginUser) {
         try {
             const response = await axios.post("http://localhost:4000/api/v1/users/login", data)
 
-            console.log(`token: ${response.data.accessToken}`)
+            // console.log(`token: ${response.data.accessToken}`)
 
             if (response.status === 200) {
                 dispatch(setStatus(Status.SUCCESS))
@@ -114,4 +114,21 @@ export function loginUser(data: ILoginUser) {
         }
     }
 
+}
+
+export function logoutUser() {
+    return async function logoutUserThunk(dispatch: AppDispatch) {
+        try {
+            const response = await axios.post("http://localhost:4000/api/v1/users/logout")
+            if (response.status === 200) {
+                dispatch(setStatus(Status.SUCCESS))
+            } else if (response.status !== 200) {
+                dispatch(setStatus(Status.ERROR))
+            }
+        } catch (error) {
+            console.log(error)
+            dispatch(setStatus(Status.ERROR))
+
+        }
+    }
 }
