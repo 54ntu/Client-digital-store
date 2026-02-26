@@ -48,7 +48,7 @@ const authSlice = createSlice({
             state.status = action.payload
         },
 
-        setToken(state: IAuthInitial, action: PayloadAction<string>) {
+        setToken(state: IAuthInitial, action: PayloadAction<string | null>) {
             state.user.token = action.payload
         }
 
@@ -117,10 +117,21 @@ export function loginUser(data: ILoginUser) {
 }
 
 export function logoutUser() {
-    return async function logoutUserThunk(dispatch: AppDispatch) {
+    return async function logoutUserThunk(dispatch: AppDispatch, getState: any) {
         try {
-            const response = await axios.post("http://localhost:4000/api/v1/users/logout")
+            const token = getState().auth.user.token
+            // console.log(`token value is : ${token}`)
+
+            const response = await axios.post("http://localhost:4000/api/v1/users/logout", {},
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+
+                })
             if (response.status === 200) {
+                localStorage.removeItem("tokenhoyo")
+                dispatch(setToken(null))
                 dispatch(setStatus(Status.SUCCESS))
             } else if (response.status !== 200) {
                 dispatch(setStatus(Status.ERROR))
