@@ -1,13 +1,21 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { useEffect, useState } from "react";
 import { logoutUser } from "../../store/authSlice";
+import { Status } from "../types/type";
+// import { Status } from "../types/type";
 
 function Navbar() {
+  const navigate = useNavigate();
   const reduxToken = useAppSelector((store) => store.auth.user.token);
   const localStorageToken = localStorage.getItem("tokenhoyo");
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const dispatch = useAppDispatch();
+  const status = useAppSelector((store) => store.auth.status);
+
+  // console.log(`status ${status}`);
+  // console.log(`redux token ${reduxToken}`);
+  // console.log(`local storage token ${localStorageToken}`);
 
   const loggedOutUser = () => {
     dispatch(logoutUser());
@@ -20,7 +28,11 @@ function Navbar() {
     } else {
       setIsLoggedIn(false);
     }
-  }, [reduxToken, localStorageToken]);
+
+    if (!reduxToken && status === Status.SUCCESS) {
+      navigate("/");
+    }
+  }, [reduxToken, status, navigate]);
 
   return (
     <header className="sticky top-0 bg-white shadow">
@@ -45,7 +57,7 @@ function Navbar() {
           HDokaan..
         </div>
         <div className="flex mt-4 sm:mt-0">
-          <Link className="px-4" to="/products">
+          <Link className="px-4" to="/product">
             Products
           </Link>
           <Link className="px-4" to="/my-orders">
@@ -55,15 +67,13 @@ function Navbar() {
 
         <div className="hidden md:block">
           {isLoggedIn ? (
-            <Link to={"/"}>
-              <button
-                type="button"
-                className="mr-5 py-3 px-8 text-sm bg-teal-500 hover:bg-teal-600 rounded text-white "
-                onClick={loggedOutUser}
-              >
-                Logout
-              </button>
-            </Link>
+            <button
+              type="button"
+              className="mr-5 py-3 px-8 text-sm bg-teal-500 hover:bg-teal-600 rounded text-white "
+              onClick={loggedOutUser}
+            >
+              Logout
+            </button>
           ) : (
             <>
               <Link to="/register">
