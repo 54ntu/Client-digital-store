@@ -76,9 +76,7 @@ export function registerUer(data: IUser) {
             }
         } catch (error) {
             console.log(error)
-            dispatch(setStatus(Status.ERROR
-
-            ))
+            dispatch(setStatus(Status.ERROR))
 
 
         }
