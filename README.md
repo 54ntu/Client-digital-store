@@ -54,13 +54,12 @@ We create one global state from there we can accesss the required data in multip
 
 <img src="./src/assets/reducer-slice.png">
 
-
 # Important !!!!
+
 To send the data or post, put functionality we need to use useDispatch hooks
 and to get the data or fetch the data we use useSelector hooks
 
 but the problem is they dont have types, so in typescript it is important to define the types for those hooks.
-
 
 ```js
 
@@ -100,4 +99,23 @@ export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
 
 //we need to do all these type casting in javascript
 //we can directly use useDispatch and useSelector hooks
+```
+
+# while passing props in typescript from one component to another it is very important to define the types of the props
+
+<img src="./src//assets/image.png">
+
+```js
+
+import type { IProduct } from "../types";
+
+interface ICardProps {
+  product: IProduct;
+}
+const Card: React.FC<ICardProps> = ({ product }) => {
+  return (
+    <div className="w-72 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl">
+      <a href="#">
+        <img
+
 ```
