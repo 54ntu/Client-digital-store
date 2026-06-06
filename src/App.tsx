@@ -5,6 +5,7 @@ import Register from "./pages/user/Register";
 import Login from "./pages/user/Login";
 import Product from "./pages/product/Product";
 import Layout from "./globals/component/Layout";
+import SingleProduct from "./pages/singleProduct/SingleProduct";
 
 const App = () => {
   const router = createBrowserRouter([
@@ -27,6 +28,10 @@ const App = () => {
         {
           path: "/product",
           element: <Product />,
+        },
+        {
+          path: "/product/:id",
+          element: <SingleProduct />,
         },
       ],
     },

@@ -21,5 +21,6 @@ category:ICategory
 
 export interface IProducts{
     products:IProduct[],
-    status:Status
+    status:Status,
+    product:IProduct | null
 }

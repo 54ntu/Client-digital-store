@@ -35,7 +35,10 @@ function Navbar() {
   }, [reduxToken, status, navigate]);
 
   return (
-    <header className="sticky top-0 bg-white shadow">
+    // bg-gray-100 dark:bg-gray-800 py-8
+    // bg-white shadow
+    //  bg-gray-100  dark:bg-gray-800 text-white
+    <header className="sticky top-0  bg-gray-100  dark:bg-gray-800 text-white">
       <div className="container flex flex-col sm:flex-row justify-between items-center mx-auto py-2 px-8">
         <div className="flex items-center text-xl">
           <div className="w-12 mr-3">

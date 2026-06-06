@@ -4,9 +4,12 @@ import Navbar from "./Navbar";
 
 const Layout = () => {
   return (
-    <div>
+    <div className="flex flex-col min-h-screen">
       <Navbar />
-      <Outlet />
+      <main className="flex-1">
+        {/* This grows and pushes footer down */}
+        <Outlet />
+      </main>
 
       <Footer />
     </div>
