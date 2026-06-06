@@ -70,13 +70,20 @@ function Navbar() {
 
         <div className="hidden md:block">
           {isLoggedIn ? (
-            <button
-              type="button"
-              className="mr-5 py-3 px-8 text-sm bg-teal-500 hover:bg-teal-600 rounded text-white "
-              onClick={loggedOutUser}
-            >
-              Logout
-            </button>
+            <>
+              <span className="px-4">
+                <Link to="/my-cart">
+                  Cart<sup>1</sup>
+                </Link>
+              </span>
+              <button
+                type="button"
+                className="mr-5 py-3 px-8 text-sm bg-teal-500 hover:bg-teal-600 rounded text-white "
+                onClick={loggedOutUser}
+              >
+                Logout
+              </button>
+            </>
           ) : (
             <>
               <Link to="/register">
