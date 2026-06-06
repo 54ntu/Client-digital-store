@@ -119,3 +119,42 @@ const Card: React.FC<ICardProps> = ({ product }) => {
         <img
 
 ```
+
+## we can optimize the loading of the single product data from the already existing data from the initialstate
+
+# so how can we do that???????????
+
+we use Rootstate to fetch the pre-existing data from the initialstate, we check whether the data is exist or not
+if exists we can directly set the product into the state otherwise we will do database query
+
+<img src ="./src//assets/image.png">
+
+```js
+
+export function fetchSingleProduct(id:string){
+    return async function fetchProductsThunk(dispatch:AppDispatch,getState:() => RootState){
+        const store = getState();
+        const existingProduct= store.products.products.find((product)=>product.id===id)
+        // console.log(`existing product:${existingProduct?.productName}`)
+        if(existingProduct){
+            dispatch(setSingleProduct(existingProduct))
+            dispatch(setStatus(Status.SUCCESS))
+            return;
+        }
+              try{
+            const response=await axios.get(`http://localhost:4000/api/v1/products/get-single/${id}`);
+            // console.log(`response we get for products:${response.data}`)
+            if(response.status===200){
+                dispatch(setSingleProduct(response.data.product))
+                dispatch(setStatus(Status.SUCCESS))
+            }else{
+                dispatch(setStatus(Status.ERROR))
+            }
+        }catch(error){
+            dispatch(setStatus(Status.ERROR))
+        }
+    }
+}
+
+
+```
