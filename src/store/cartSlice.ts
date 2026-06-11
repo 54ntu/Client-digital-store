@@ -27,27 +27,25 @@ export default cartSlice.reducer;
 
 
 
-function addToCart(productId:string, quantity:number){
+export function addToCart(productId:string){
     return async function addToCartThunk(dispatch:AppDispatch){
         try{
             // Make API call to add item to cart
             // On success, update cart items in the state
             // dispatch(setCartItems(updatedCartItems));
             // dispatch(setStatus(Status.SUCCESS));
-            const token = localStorage.getItem("token");
+          
             const response = await axios.post("http://localhost:4000/api/v1/carts/",
                     {
                 productId,
-                quantity
-            },{
-                headers:{
-                    "Content-Type":"application/json",
-                    "Authorization": `Bearer ${token}`
-                }
-            })
+                quantity:1
+            },
+        {
+            withCredentials:true,
+        })
                 // console.log(response.data);
                 if(response.status===200){
-                dispatch(setCartItems(response.data.cartItems));
+                dispatch(setCartItems(response.data.data));
                 dispatch(setStatus(Status.SUCCESS));
                 }else{
                     dispatch(setStatus(Status.ERROR));
@@ -66,7 +64,25 @@ function addToCart(productId:string, quantity:number){
 }
 
 
-function getCartItems(){
-    return async function getCartItemsThunk(dispatch:AppDispatch){}
-    
+export function getCartItems(){
+    return async function getCartItemsThunk(dispatch:AppDispatch){
+
+   
+    try{
+        const response = await axios.get("http://localhost:4000/api/v1/carts/",
+        {
+            withCredentials:true
+        })
+        if(response.status===200){
+            dispatch(setCartItems(response.data.data));
+            dispatch(setStatus(Status.SUCCESS));
+        }else{
+            dispatch(setStatus(Status.ERROR));
+        }
+    }
+    catch(error){
+        dispatch(setStatus(Status.ERROR));
+        // console.error("Error fetching cart items:", error);
+    }
+  }
 }

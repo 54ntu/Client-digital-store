@@ -88,7 +88,7 @@ export function registerUer(data: IUser) {
 export function loginUser(data: ILoginUser) {
     return async function loginUserThunk(dispatch: AppDispatch) {
         try {
-            const response = await axios.post("http://localhost:4000/api/v1/users/login", data)
+            const response = await axios.post("http://localhost:4000/api/v1/users/login", data,{withCredentials:true})
 
             // console.log(`token: ${response.data.accessToken}`)
 
